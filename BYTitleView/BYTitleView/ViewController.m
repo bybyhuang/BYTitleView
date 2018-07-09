@@ -19,7 +19,7 @@
     [super viewDidLoad];
    
     NSArray *titles = @[@"11",@"22",@"33",@"11",@"22",@"33",@"11",@"22",@"33",@"11",@"22",@"33",@"11",@"22",@"33"];
-    BYTitleView *titleView = [[BYTitleView alloc] initWithFrame:CGRectMake(0, 0,300, 44) titlesArray:titles];
+    BYTitleView *titleView = [[BYTitleView alloc] initWithFrame:CGRectMake(0, 0,370, 44) titlesArray:titles];
     self.navigationItem.titleView = titleView;
 }
 

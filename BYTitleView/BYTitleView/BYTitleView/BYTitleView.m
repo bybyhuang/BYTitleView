@@ -67,18 +67,22 @@
     
     UILabel *lastLabel;
     for(int i =0;i<self.titlesArray.count - 1;i++){
+        UILabel *label;
         if(lastLabel != nil){
             
+            label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(lastLabel.frame), 0, [self.titlesWidthArray[i] floatValue], self.height)];
         }else{
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [self.titlesWidthArray[i] floatValue], self.height)];
-            label.font = self.titleFont;
-            label.textColor = [UIColor blackColor];
-            
-            [scrollView addSubview:label];
+            label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [self.titlesWidthArray[i] floatValue], self.height)];
             
             
         }
+        label.font = self.titleFont;
+        label.textColor = [UIColor blackColor];
+        label.text = self.titlesArray[i];
+        label.textAlignment = NSTextAlignmentCenter;
+        [scrollView addSubview:label];
         
+        lastLabel = label;
         
     }
     
@@ -88,6 +92,8 @@
     
     
 }
+
+
 
 
 
@@ -112,7 +118,7 @@
     CGFloat totalWidth = 0;
     for (NSString *title in self.titlesArray) {
         //加上两边的间隔
-        CGFloat width = [self stringWidthWithString:title] + 4;
+        CGFloat width = [self stringWidthWithString:title] + 10;
         [widthArray addObject:[NSNumber numberWithFloat:width]];
         totalWidth += width;
     }
