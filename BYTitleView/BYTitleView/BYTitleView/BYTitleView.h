@@ -10,5 +10,14 @@
 
 @interface BYTitleView : UIView
 
+
 - (instancetype)initWithFrame:(CGRect)frame titlesArray:(NSArray *)array;
 @end
+
+
+@interface BYTitleButton : UIButton
+
+- (instancetype)initWithFrame:(CGRect)frame withText:(NSString *)text withFont:(UIFont *)font withColor:(UIColor *)color withSelectedColor:(UIColor *)selectedColor;
+@end
+
+

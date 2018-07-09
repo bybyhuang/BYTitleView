@@ -18,9 +18,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
-    NSArray *titles = @[@"11",@"22",@"33",@"11",@"22",@"33",@"11",@"22",@"33",@"11",@"22",@"33",@"11",@"22",@"33"];
-    BYTitleView *titleView = [[BYTitleView alloc] initWithFrame:CGRectMake(0, 0,370, 44) titlesArray:titles];
-    self.navigationItem.titleView = titleView;
+    NSArray *titles = @[@"你好",@"测来了试",@"真是6",@"啊哈哈哈是是",@"09090",@"你好",@"测来了试",@"真是6",@"啊哈哈哈是是",@"09090"];
+    
+    self.navigationItem.leftBarButtonItem = nil;
+    self.navigationItem.rightBarButtonItem = nil;
+    BYTitleView *titleView = [[BYTitleView alloc] initWithFrame:CGRectMake(0, 100,375, 44) titlesArray:titles];
+    
+    
+    [self.view addSubview:titleView];
 }
 
 
