@@ -12,12 +12,28 @@
 
 
 - (instancetype)initWithFrame:(CGRect)frame titlesArray:(NSArray *)array;
+
+
+/**
+ 获取点击title的下标
+ */
+@property(nonatomic,copy)void(^getClickIndex)(NSInteger index);
+
+/**
+ 设置选中的下标
+ */
+- (void)selectIndex:(NSInteger)index;
 @end
 
 
 @interface BYTitleButton : UIButton
 
+@property(nonatomic,assign)NSInteger index;
+
 - (instancetype)initWithFrame:(CGRect)frame withText:(NSString *)text withFont:(UIFont *)font withColor:(UIColor *)color withSelectedColor:(UIColor *)selectedColor;
+
+
+
 @end
 
 

@@ -48,6 +48,10 @@
 
 
 @property(nonatomic,weak)UIScrollView *scrollView;
+/**
+ scrollView背景色
+ */
+@property(nonatomic,strong)UIColor *backgroundColor;
 
 @end
 
@@ -61,9 +65,28 @@
         self.spaceWidth = 15;
         self.titlesArray = array;
         self.titleFont = [UIFont systemFontOfSize:16];
+        self.normalColor = [UIColor colorWithRed:145/255.0 green:145/255.0 blue:145/255.0 alpha:1];
+        self.highlightedColor = [UIColor blackColor];
+        self.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1];
         [self initSubViews];
         
         
+    }
+    return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame titlesArray:(NSArray *)array font:(UIFont *)font normalColor:(UIColor *)normalColor highlightedColor:(UIColor *)highlightedColor backgroundColor:(UIColor *)backgroundColor
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.spaceWidth = 15;
+        self.titlesArray = array;
+        self.titleFont = font;
+        self.normalColor = normalColor;
+        self.highlightedColor = highlightedColor;
+        self.backgroundColor = backgroundColor;
+        
+        [self initSubViews];
     }
     return self;
 }
@@ -78,8 +101,8 @@
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
     //设置scrollview的contentSize
     scrollView.contentSize = CGSizeMake(self.totalWidth, self.height);
-
-    scrollView.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1];
+    scrollView.showsHorizontalScrollIndicator = false;
+    scrollView.backgroundColor = self.backgroundColor;
     
     [self addSubview:scrollView];
     self.scrollView = scrollView;
@@ -96,12 +119,14 @@
             
             
             titleButton = [[BYTitleButton alloc] initWithFrame:frame withText:self.titlesArray[i] withFont:self.titleFont withColor:C5 withSelectedColor:[UIColor blackColor]];
+            titleButton.index = i;
          
         }else{
             CGRect frame = CGRectMake(0, 0, [self.titlesWidthArray[i] floatValue], self.height-1);
             
             titleButton = [[BYTitleButton alloc] initWithFrame:frame withText:self.titlesArray[i] withFont:self.titleFont withColor:C5 withSelectedColor:[UIColor blackColor]];
             titleButton.selected = true;
+            titleButton.index = 0;
             self.selectedButton = titleButton;
         }
        
@@ -143,6 +168,23 @@
     }else{
         [self.scrollView setContentOffset:CGPointMake(0, 0) animated:true];
     }
+    
+    if(self.getClickIndex != nil){
+        self.getClickIndex(button.index);
+    }
+    
+}
+
+- (void)selectIndex:(NSInteger)index{
+    BYTitleButton *button = self.titlesArray[index];
+    button.selected = true;
+    self.selectedButton.selected = false;
+    [UIView animateWithDuration:0.3 animations:^{
+        
+        CGRect lineFrame = CGRectMake(button.x + self.spaceWidth, self.height-2, button.width - self.spaceWidth * 2, 2);
+        self.buttonLine.frame = lineFrame;
+    }];
+    [self.scrollView setContentOffset:CGPointMake(button.centerX - BYScreenWidth/2, 0) animated:true];
 }
 
 
