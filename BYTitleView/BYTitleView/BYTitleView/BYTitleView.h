@@ -11,6 +11,17 @@
 @interface BYTitleView : UIView
 
 
+/**
+ 初始化
+
+ @param frame 宽高
+ @param array array
+ @param font 字体
+ @param normalColor 默认颜色
+ @param highlightedColor 高亮
+ @param backgroundColor 背景色
+ */
+- (instancetype)initWithFrame:(CGRect)frame titlesArray:(NSArray *)array font:(UIFont *)font normalColor:(UIColor *)normalColor highlightedColor:(UIColor *)highlightedColor backgroundColor:(UIColor *)backgroundColor;
 - (instancetype)initWithFrame:(CGRect)frame titlesArray:(NSArray *)array;
 
 
