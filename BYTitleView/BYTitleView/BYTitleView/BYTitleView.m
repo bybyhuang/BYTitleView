@@ -47,6 +47,7 @@
 @property(nonatomic,assign)CGFloat spaceWidth;
 
 
+@property(nonatomic,weak)UIScrollView *scrollView;
 
 @end
 
@@ -78,25 +79,28 @@
     //设置scrollview的contentSize
     scrollView.contentSize = CGSizeMake(self.totalWidth, self.height);
 
-    scrollView.backgroundColor = [UIColor lightGrayColor];
+    scrollView.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1];
     
     [self addSubview:scrollView];
+    self.scrollView = scrollView;
     
     
     
     BYTitleButton *lastButton;
+    UIColor *C5 = [UIColor colorWithRed:145/255.0 green:145/255.0 blue:145/255.0 alpha:1];
     for(int i =0;i<self.titlesArray.count - 1;i++){
         BYTitleButton *titleButton;
         if(lastButton != nil){
             
             CGRect frame = CGRectMake(CGRectGetMaxX(lastButton.frame), 0, [self.titlesWidthArray[i] floatValue], self.height-1);
             
-            titleButton = [[BYTitleButton alloc] initWithFrame:frame withText:self.titlesArray[i] withFont:self.titleFont withColor:[UIColor blackColor] withSelectedColor:[UIColor blueColor]];
+            
+            titleButton = [[BYTitleButton alloc] initWithFrame:frame withText:self.titlesArray[i] withFont:self.titleFont withColor:C5 withSelectedColor:[UIColor blackColor]];
          
         }else{
             CGRect frame = CGRectMake(0, 0, [self.titlesWidthArray[i] floatValue], self.height-1);
             
-            titleButton = [[BYTitleButton alloc] initWithFrame:frame withText:self.titlesArray[i] withFont:self.titleFont withColor:[UIColor blackColor] withSelectedColor:[UIColor blueColor]];
+            titleButton = [[BYTitleButton alloc] initWithFrame:frame withText:self.titlesArray[i] withFont:self.titleFont withColor:C5 withSelectedColor:[UIColor blackColor]];
             titleButton.selected = true;
             self.selectedButton = titleButton;
         }
@@ -131,6 +135,14 @@
         CGRect lineFrame = CGRectMake(button.x + self.spaceWidth, self.height-2, button.width - self.spaceWidth * 2, 2);
         self.buttonLine.frame = lineFrame;
     }];
+    
+    
+    
+    if(button.centerX > BYScreenWidth /2 ){
+        [self.scrollView setContentOffset:CGPointMake(button.centerX - BYScreenWidth/2, 0) animated:true];
+    }else{
+        [self.scrollView setContentOffset:CGPointMake(0, 0) animated:true];
+    }
 }
 
 

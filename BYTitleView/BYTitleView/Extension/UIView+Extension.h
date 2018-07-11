@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+#define BYScreenWidth [UIScreen mainScreen].bounds.size.width
+
+
 @interface UIView (Extension)
 
 @property (nonatomic,assign) CGFloat x;
